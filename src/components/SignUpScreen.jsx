@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
+import Swal from "sweetalert2";
 
 
 const SignUpScreen = () => {
@@ -13,7 +14,24 @@ const SignUpScreen = () => {
         const name = form.name.value
         const email = form.email.value
         const password = form.password.value
-        console.log(name, email, password)
+
+        createUser(email, password)
+            .then(result => {
+                const registeredUser = result.user
+                console.log(registeredUser)
+                updateUserName(name)
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Success',
+                            text: 'Your account has been created successfully',
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        })
+                    })
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     return (
