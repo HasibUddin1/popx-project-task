@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const SignUpScreen = () => {
 
     const { createUser, updateUserName } = useContext(AuthContext)
+
+    const navigate = useNavigate()
 
     const handleSignUp = event => {
         event.preventDefault()
@@ -25,6 +28,7 @@ const SignUpScreen = () => {
                             icon: 'success',
                             confirmButtonText: 'Ok'
                         })
+                        navigate('/profile')
                     })
             })
             .catch(error => {
