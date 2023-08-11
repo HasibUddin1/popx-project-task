@@ -29,9 +29,9 @@ const AuthProviders = ({ children }) => {
         return signOut(auth)
     }
 
-    const updateUserName = name => {
+    const updateUserName = (user, name) => {
         setLoading(true)
-        return updateProfile(auth.currentUser, {
+        return updateProfile(user, {
             displayName: name
         })
     }
