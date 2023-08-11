@@ -16,9 +16,7 @@ const SignUpScreen = () => {
         const password = form.password.value
 
         createUser(email, password)
-            .then(result => {
-                const registeredUser = result.user
-                console.log(registeredUser)
+            .then(() => {
                 updateUserName(name)
                     .then(() => {
                         Swal.fire({

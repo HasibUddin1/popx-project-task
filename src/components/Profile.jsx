@@ -1,11 +1,24 @@
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import userImage from '../assets/images/popx-project-image.jpg'
+import Swal from "sweetalert2";
 
 
 const Profile = () => {
 
-    const { user } = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    title: 'Success',
+                    text: 'You have successfully logged out',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            })
+    }
 
     return (
         <div className="min-h-screen bg-[#f7f9f8]">
@@ -20,6 +33,7 @@ const Profile = () => {
                     <div>
                         <h1 className="text-2xl font-semibold">{user?.displayName}</h1>
                         <p className="text-xl">{user?.email}</p>
+                        <button onClick={handleLogOut} className="bg-red-600 text-white px-4 py-1 rounded-md hover:bg-red-800 ease-in-out duration-200 mt-2">Log Out</button>
                     </div>
                 </div>
                 <div className="mt-5">
