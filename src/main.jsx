@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import LandingScreen from './components/LandingScreen';
 import LoginScreen from './components/LoginScreen';
+import SignUpScreen from './components/SignUpScreen';
+import Profile from './components/Profile';
 
 const router = createBrowserRouter([
   {
@@ -15,11 +17,16 @@ const router = createBrowserRouter([
     element: <LandingScreen></LandingScreen>
   },
   {
-    path: '/loginScreen',
+    path: 'loginScreen',
     element: <LoginScreen></LoginScreen>
   },
   {
-    path: '/' 
+    path: 'signUpScreen',
+    element: <SignUpScreen></SignUpScreen>
+  },
+  {
+    path: 'profile',
+    element: <Profile></Profile>
   }
 ])
 
