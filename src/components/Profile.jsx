@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import userImage from '../assets/images/popx-project-image.jpg'
 import Swal from "sweetalert2";
+import { AiFillCamera } from "react-icons/ai";
 
 
 const Profile = () => {
@@ -27,8 +28,11 @@ const Profile = () => {
             </div>
             <div className="py-10">
                 <div className="flex gap-5 w-9/12 mx-auto">
-                    <div>
+                    <div className="relative">
                         <img className="w-[100px] h-[100px] rounded-full" src={userImage} alt="" />
+                        <div className="bg-[#6c25ff] w-fit rounded-full p-1 absolute right-0 bottom-[10px]">
+                            <AiFillCamera className="text-white text-xl"></AiFillCamera>
+                        </div>
                     </div>
                     <div>
                         <h1 className="text-2xl font-semibold">{user?.displayName}</h1>
