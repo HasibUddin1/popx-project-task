@@ -11,6 +11,7 @@ import LoginScreen from './components/LoginScreen';
 import SignUpScreen from './components/SignUpScreen';
 import Profile from './components/Profile';
 import AuthProviders from './providers/AuthProviders';
+import PrivateRoute from './routes/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
   },
   {
     path: 'profile',
-    element: <Profile></Profile>
+    element: <PrivateRoute><Profile></Profile></PrivateRoute>
   }
 ])
 
