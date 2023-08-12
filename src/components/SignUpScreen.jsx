@@ -2,11 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 const SignUpScreen = () => {
 
     const { createUser, updateUserName } = useContext(AuthContext)
+
+    const [error, setError] = useState('')
 
     const navigate = useNavigate()
 
@@ -18,6 +21,7 @@ const SignUpScreen = () => {
         const email = form.email.value
         const password = form.password.value
 
+        setError('')
         createUser(email, password)
             .then(result => {
                 const registeredUser = result.user
@@ -35,6 +39,7 @@ const SignUpScreen = () => {
             })
             .catch(error => {
                 console.log(error)
+                setError(error.message)
             })
     }
 
@@ -75,6 +80,7 @@ const SignUpScreen = () => {
                     </label>
                 </div>
                 <input className="mt-5 px-4 py-2 bg-[#6c25ff] hover:bg-[#35009f] ease-in-out duration-200 text-white rounded-md w-full cursor-pointer" type="submit" value="Create Account" />
+                {error && <p className="text-red-600 font-bold">{error}</p>}
             </form>
         </div>
     );

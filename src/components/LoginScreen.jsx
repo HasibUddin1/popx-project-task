@@ -2,11 +2,14 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProviders";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useState } from "react";
 
 
 const LoginScreen = () => {
 
     const { signIn } = useContext(AuthContext)
+
+    const [error, setError] = useState('')
 
     const navigate = useNavigate()
 
@@ -17,6 +20,7 @@ const LoginScreen = () => {
         const email = form.email.value
         const password = form.password.value
 
+        setError('')
         signIn(email, password)
             .then(() => {
                 Swal.fire({
@@ -26,6 +30,12 @@ const LoginScreen = () => {
                     confirmButtonText: 'Ok'
                 })
                 navigate('/profile')
+            })
+            .catch(error => {
+                console.log(error)
+                if(error.message === 'Firebase: Error (auth/user-not-found).'){
+                    setError('Your credentials do not match')
+                }
             })
     }
 
@@ -43,6 +53,7 @@ const LoginScreen = () => {
                     <input className="w-full py-1" type="password" name="password" placeholder="Enter password" required />
                 </fieldset>
                 <input className="mt-5 px-4 py-2 bg-[#6c25ff] hover:bg-[#35009f] ease-in-out duration-200 text-white rounded-md w-full cursor-pointer" type="submit" value="Login" />
+                {error && <p className="text-red-600 font-bold">{error}</p>}
             </form>
         </div>
     );
